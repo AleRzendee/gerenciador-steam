@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css'
 
 interface Jogo {
   id: number;
@@ -18,10 +17,42 @@ function App() {
 
   ]);
 
+  const [novoNome, setNovoNome] = useState('');
+
+  function adicionarJogo(e: React.FormEvent) {
+    e.preventDefault();
+
+    if (!novoNome.trim()) return;
+
+    const novoJogo: Jogo = {
+      id: Date.now(),
+      nome: novoNome,
+      genero: 'RPG',
+      horasJogadas: 0,
+      status: 'Backlog'
+    };
+
+    setJogos([...jogos, novoJogo]);
+
+    setNovoNome('');
+  }
+
   return (
     <>
       <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
         <h1>Gerenciador de Jogos da Steam</h1>
+        <form onSubmit={adicionarJogo} style={{ marginBottom: '20px' }}>
+          <input
+            type='text'
+            placeholder='Nome do jogo da Steam...'
+            value={novoNome}
+            onChange={(e) => setNovoNome(e.target.value)}
+            style={{ padding: '8px', marginRight: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+          />
+          <button type='submit' style={{ padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}>
+
+          </button>
+        </form>
         <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
           {jogos.map((jogo) => (
             <div key={jogo.id} style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '8px' }}>
