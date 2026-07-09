@@ -19,7 +19,7 @@ function App() {
 
   const [novoNome, setNovoNome] = useState('');
 
-  function adicionarJogo(e: React.FormEvent) {
+  function adicionarJogo(e: React.SubmitEvent) {
     e.preventDefault();
 
     if (!novoNome.trim()) return;
