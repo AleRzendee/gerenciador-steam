@@ -19,6 +19,8 @@ function App() {
 
   const [novoNome, setNovoNome] = useState('');
 
+  const [novoGenero, setNovoGenero] = useState('')
+
   function adicionarJogo(e: React.SubmitEvent) {
     e.preventDefault();
 
@@ -27,7 +29,7 @@ function App() {
     const novoJogo: Jogo = {
       id: Date.now(),
       nome: novoNome,
-      genero: 'RPG',
+      genero: novoGenero,
       horasJogadas: 0,
       status: 'Backlog'
     };
@@ -35,6 +37,7 @@ function App() {
     setJogos([...jogos, novoJogo]);
 
     setNovoNome('');
+    setNovoGenero('');
   }
 
   return (
@@ -49,8 +52,15 @@ function App() {
             onChange={(e) => setNovoNome(e.target.value)}
             style={{ padding: '8px', marginRight: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
           />
+          <input
+            type='text'
+            placeholder='Gênero do jogo'
+            value={novoGenero}
+            onChange={(e) => setNovoGenero(e.target.value)}
+            style={{ padding: '8px', marginRight: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+          />
           <button type='submit' style={{ padding: '8px 16px', borderRadius: '4px', cursor: 'pointer' }}>
-
+            Adicionar
           </button>
         </form>
         <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
