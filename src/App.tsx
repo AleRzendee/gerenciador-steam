@@ -40,6 +40,17 @@ function App() {
     setNovoGenero('');
   }
 
+  function adicionarHora(id: number) {
+    const listaAtualizada = jogos.map(jogo => {
+      if (jogo.id === id) {
+        return { ...jogo, horasJogadas: jogo.horasJogadas + 1 };
+      }
+      return jogo;
+    });
+
+    setJogos(listaAtualizada);
+  }
+
   return (
     <>
       <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
@@ -65,7 +76,11 @@ function App() {
         </form>
         <div style={{ display: 'flex', gap: '15px', marginTop: '20px' }}>
           {jogos.map((jogo) => (
-            <CardJogo key={jogo.id} jogo={jogo} />
+            <CardJogo
+              key={jogo.id}
+              jogo={jogo}
+              onAdicionarHora={adicionarHora}
+            />
           ))}
 
         </div>
